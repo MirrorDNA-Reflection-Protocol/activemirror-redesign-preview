@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { ChetanaScanner } from '@/components/ChetanaScanner';
+import { MediaCard } from '@/components/MediaCard';
 import { PageFooter } from '@/components/PageFooter';
 import { SiteNav } from '@/components/SiteNav';
 import { HeroSplit } from '@/components/HeroSplit';
 import { SectionTitle } from '@/components/SectionTitle';
 import { TaskNavigator } from '@/components/TaskNavigator';
-import { chetanaCategories, chetanaExamples, chetanaFaqs } from '@/lib/site';
+import { chetanaCategories, chetanaExamples, chetanaFaqs, chetanaMedia } from '@/lib/site';
 
 export default function ChetanaPage() {
   return (
@@ -51,7 +52,7 @@ export default function ChetanaPage() {
           <SectionTitle
             eyebrow="Example inputs"
             title={<>Common things people check</>}
-            copy="Show the visitor exactly what the scanner is for before they wonder whether their case fits."
+            copy="These are the kinds of screenshots, messages, and links people usually want checked."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {chetanaExamples.map((item) => (
@@ -69,9 +70,34 @@ export default function ChetanaPage() {
       <section className="container-pad pb-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
+            eyebrow="See the product"
+            title={<>What the experience actually looks like</>}
+            copy="A quick demo and a few real screens do more than abstract claims."
+          />
+          <div className="grid gap-5 lg:grid-cols-[1.1fr,0.9fr,0.9fr]">
+            {chetanaMedia.map((item, index) => (
+              <MediaCard
+                key={item.title}
+                alt={item.alt}
+                kind={item.kind}
+                label={item.label}
+                note={item.note}
+                poster={item.poster}
+                ratio={index === 0 ? 'wide' : index === 1 ? 'portrait' : 'landscape'}
+                src={item.src}
+                title={item.title}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-pad pb-12">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
             eyebrow="Scam categories"
-            title={<>The language stays simple even when the patterns are messy.</>}
-            copy="Never make the visitor decode taxonomy first. Show the categories as recognizable situations."
+            title={<>What Chetana can help with</>}
+            copy="From fake payments to bank and parcel scams, the goal is the same: help people pause before they lose money."
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {chetanaCategories.map((item) => (
@@ -88,8 +114,8 @@ export default function ChetanaPage() {
           <div className="glass-panel p-6 sm:p-8">
             <SectionTitle
               eyebrow="Result design"
-              title={<>What Chetana gives back</>}
-              copy="A signal, the reason, and the next safe step. That is the product."
+              title={<>What you get back</>}
+              copy="A risk signal, the reason, and the safest next move."
             />
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="info-card p-5">
@@ -112,9 +138,9 @@ export default function ChetanaPage() {
             style={{ background: 'linear-gradient(140deg, #C84D3A 0%, #D78232 100%)' }}
           >
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/78">If money is already gone</p>
-            <h3 className="mt-3 text-3xl font-extrabold tracking-[-0.05em]">Act fast and keep evidence.</h3>
+            <h3 className="mt-3 text-3xl font-extrabold tracking-[-0.05em]">Move fast and save proof.</h3>
             <p className="mt-4 max-w-md text-sm leading-7 text-white/88">
-              Chetana should point people to fast next steps, not just a score. Recovery copy belongs in the product, not buried in documentation.
+              The product should help people act right away, not just tell them something is wrong.
             </p>
             <div className="mt-6 rounded-[1.5rem] bg-white/14 p-4 backdrop-blur">
               <p className="text-sm font-semibold text-white">Immediate moves</p>
@@ -132,8 +158,8 @@ export default function ChetanaPage() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="FAQ"
-            title={<>The trust layer should stay plain.</>}
-            copy="Answer the obvious questions without turning the page into a wall of copy."
+            title={<>Common questions</>}
+            copy="Short answers before you try it."
           />
           <div className="grid gap-4 lg:grid-cols-3">
             {chetanaFaqs.map((item) => (
@@ -146,7 +172,7 @@ export default function ChetanaPage() {
         </div>
       </section>
 
-      <PageFooter note="Chetana works best when the scan starts instantly and the outcome tells people exactly what to do next." />
+      <PageFooter note="Chetana helps people stop, check, and act before scam pressure turns into a loss." />
 
       <TaskNavigator
         title="Want help with this screenshot?"

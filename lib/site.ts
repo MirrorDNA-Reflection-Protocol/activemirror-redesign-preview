@@ -1,3 +1,13 @@
+type MediaItem = {
+  kind: 'image' | 'video';
+  src: string;
+  alt: string;
+  label: string;
+  title: string;
+  note: string;
+  poster?: string;
+};
+
 export const homeCards = [
   {
     title: 'Chetana',
@@ -8,7 +18,9 @@ export const homeCards = [
     cta: 'Check a screenshot',
     tone: 'safety',
     accent: 'linear-gradient(90deg, #1F6F4A 0%, #D78232 100%)',
-    highlights: ['Screenshot-first scanner', 'Clear reasons', 'What to do next']
+    highlights: ['Screenshot-first scanner', 'Clear reasons', 'What to do next'],
+    mediaSrc: '/media/chetana/hero-phone.png',
+    mediaAlt: 'Phone preview for the Chetana scam checker'
   },
   {
     title: 'MirrorProd India',
@@ -19,18 +31,22 @@ export const homeCards = [
     cta: 'Make an ad or reel',
     tone: 'creative',
     accent: 'linear-gradient(90deg, #F0624D 0%, #6F3B5F 100%)',
-    highlights: ['Product ads', 'Founder reels', 'Micro-drama pilots']
+    highlights: ['Product ads', 'Founder reels', 'Micro-drama pilots'],
+    mediaSrc: '/media/mirrorprod/mainstream-shot.png',
+    mediaAlt: 'Preview of the MirrorProd India landing page'
   },
   {
     title: 'Mirror Seed',
     eyebrow: 'Identity utility',
     copy: 'Stop repeating yourself to AI.',
-    description: 'Create a portable identity starter you can reuse across tools and sessions.',
+    description: 'Create a reusable AI setup you can paste across tools and sessions.',
     href: '/mirrorseed',
     cta: 'Create my AI identity',
     tone: 'utility',
     accent: 'linear-gradient(90deg, #2F7A78 0%, #8AB7AD 100%)',
-    highlights: ['Portable starter', 'Cleaner continuity', 'Fast setup']
+    highlights: ['Portable starter', 'Cleaner continuity', 'Fast setup'],
+    mediaSrc: '/media/mirrorseed/hero.png',
+    mediaAlt: 'Preview image for Mirror Seed'
   }
 ];
 
@@ -41,7 +57,7 @@ export const homeReasons = [
   },
   {
     title: 'Need better creative fast',
-    copy: 'Skip the brochure and move straight to samples, offers, and a brief.'
+    copy: 'See sample looks, pick a package, and send a short brief.'
   },
   {
     title: 'Need a cleaner AI setup',
@@ -50,9 +66,9 @@ export const homeReasons = [
 ];
 
 export const homeProof = [
-  'Built for real-world use',
-  'Fast, mobile-first, and easy to try',
-  'Each page has one job and one clear next step'
+  'Real screens and demos inside each page',
+  'Fast to try on phone or laptop',
+  'Each product has one clear next step'
 ];
 
 export const chetanaExamples = [
@@ -182,8 +198,8 @@ export const mirrorProdFaqs = [
     answer: 'Yes. The brief flow is built to capture Hindi and regional language needs early.'
   },
   {
-    question: 'When does provenance matter?',
-    answer: 'After the creative fit is clear. Verification is available when the brand or campaign needs it.'
+    question: 'How do approvals work?',
+    answer: 'Once the direction feels right, we turn it into a short brief and a simple delivery plan your team can approve fast.'
   }
 ];
 
@@ -202,10 +218,94 @@ export const mirrorSeedBenefits = [
   }
 ];
 
+export const chetanaMedia: MediaItem[] = [
+  {
+    kind: 'video',
+    src: '/media/chetana/phone-demo.mp4',
+    poster: '/media/chetana/phone-demo-poster.jpg',
+    alt: 'Short phone demo of the Chetana flow',
+    label: 'Phone demo',
+    title: 'See the check flow on a phone',
+    note: 'A short loop that shows the product as a quick, everyday safety check.'
+  },
+  {
+    kind: 'image',
+    src: '/media/chetana/scan-result.png',
+    alt: 'Example Chetana result screen with a scam warning',
+    label: 'Result screen',
+    title: 'A clear result people can act on',
+    note: 'The goal is simple: show the risk, explain why, and tell people what to do next.'
+  },
+  {
+    kind: 'image',
+    src: '/media/chetana/site-screenshot.png',
+    alt: 'Screenshot of the Chetana site',
+    label: 'Live screen',
+    title: 'A simple page, not a wall of features',
+    note: 'People should know what to do within seconds of landing.'
+  }
+];
+
+export const mirrorProdMedia: MediaItem[] = [
+  {
+    kind: 'image',
+    src: '/media/mirrorprod/mainstream-shot.png',
+    alt: 'Screenshot of the MirrorProd India page',
+    label: 'Landing page',
+    title: 'Lead with what the buyer can buy',
+    note: 'Real sample looks and clear packages help people decide faster.'
+  },
+  {
+    kind: 'video',
+    src: '/media/mirrorprod/founder-desk.mp4',
+    poster: '/media/mirrorprod/founder-desk-poster.jpg',
+    alt: 'Founder-style desk scene video',
+    label: 'Founder reel',
+    title: 'Human-led founder footage',
+    note: 'Useful for explainers, trust-building, and high-context offers.'
+  },
+  {
+    kind: 'video',
+    src: '/media/mirrorprod/founder-beach.mp4',
+    poster: '/media/mirrorprod/founder-beach-poster.jpg',
+    alt: 'Founder-style beach scene video',
+    label: 'Brand mood',
+    title: 'Polished scenes for short-form launches',
+    note: 'A quick way to show range before the buyer fills in a brief.'
+  }
+];
+
+export const mirrorSeedMedia: MediaItem[] = [
+  {
+    kind: 'image',
+    src: '/media/mirrorseed/hero.png',
+    alt: 'Illustration for Mirror Seed',
+    label: 'Hero image',
+    title: 'Create one setup you can keep using',
+    note: 'Mirror Seed helps you stop rewriting the same context every time you open a new AI.'
+  },
+  {
+    kind: 'image',
+    src: '/media/mirrorseed/how-it-works.png',
+    alt: 'Three-step diagram for Mirror Seed',
+    label: 'How it works',
+    title: 'Create it once, use it everywhere',
+    note: 'Make the seed, save it, and paste it into whichever AI you use next.'
+  },
+  {
+    kind: 'image',
+    src: '/media/mirrorseed/file.png',
+    alt: 'Mirror Seed file icon graphic',
+    label: 'Portable file',
+    title: 'Your setup in one reusable file',
+    note: 'Keep the starting point portable instead of re-explaining yourself every session.'
+  }
+];
+
 export const mirrorSeedFaqs = [
   {
     question: 'Is this free?',
-    answer: 'It should feel like a simple utility: low-friction, quick to try, and easy to keep.'
+    answer: 'It should feel like a simple utility: quick to try, easy to keep, and easy to come back to.'
   },
   {
     question: 'Do I need an account?',

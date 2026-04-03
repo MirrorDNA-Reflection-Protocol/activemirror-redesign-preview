@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
+import { MediaCard } from '@/components/MediaCard';
 import { MirrorProdBriefForm } from '@/components/MirrorProdBriefForm';
 import { PageFooter } from '@/components/PageFooter';
 import { SiteNav } from '@/components/SiteNav';
 import { HeroSplit } from '@/components/HeroSplit';
 import { SectionTitle } from '@/components/SectionTitle';
 import { TaskNavigator } from '@/components/TaskNavigator';
-import { mirrorProdFaqs, mirrorProdOffers, mirrorProdSamples, mirrorProdSteps } from '@/lib/site';
+import { mirrorProdFaqs, mirrorProdMedia, mirrorProdOffers, mirrorProdSamples, mirrorProdSteps } from '@/lib/site';
 
 export default function MirrorProdPage() {
   return (
@@ -29,7 +30,7 @@ export default function MirrorProdPage() {
         detail={
           <>
             <span className="metric-pill">Samples first</span>
-            <span className="metric-pill">Offer ladder</span>
+            <span className="metric-pill">Clear packages</span>
             <span className="metric-pill">Brief in under a minute</span>
           </>
         }
@@ -41,30 +42,20 @@ export default function MirrorProdPage() {
         }
         visual={
           <div className="grid gap-4 sm:grid-cols-2">
-            {mirrorProdSamples.slice(0, 3).map((sample, index) => (
-              <Link
-                key={sample.title}
-                href={`/mirrorprod-india?package=${sample.packageId}#brief`}
-                className={`poster-card p-4 ${index === 0 ? 'sm:col-span-2' : ''}`}
-              >
-                <div
-                  className={`poster-art ${index === 0 ? 'min-h-[17rem]' : 'min-h-[12.5rem]'}`}
-                  style={{ backgroundImage: sample.art }}
-                >
-                  <div className="absolute left-4 top-4 z-10 rounded-full bg-white/18 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur">
-                    {sample.tag}
-                  </div>
-                  <div className="absolute inset-x-4 bottom-4 z-10 flex items-end justify-between gap-4">
-                    <div>
-                      <h3 className="text-2xl font-extrabold tracking-[-0.05em] text-white">{sample.title}</h3>
-                      <p className="mt-2 max-w-sm text-sm leading-6 text-white/80">{sample.note}</p>
-                    </div>
-                    <span className="rounded-full bg-white/14 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur">
-                      {sample.stat}
-                    </span>
-                  </div>
-                </div>
-              </Link>
+            {mirrorProdMedia.map((item, index) => (
+              <div key={item.title} className={index === 0 ? 'sm:col-span-2' : ''}>
+                <MediaCard
+                  alt={item.alt}
+                  href="#brief"
+                  kind={item.kind}
+                  label={item.label}
+                  note={item.note}
+                  poster={item.poster}
+                  ratio={index === 0 ? 'wide' : 'landscape'}
+                  src={item.src}
+                  title={item.title}
+                />
+              </div>
             ))}
           </div>
         }
@@ -75,7 +66,7 @@ export default function MirrorProdPage() {
           <SectionTitle
             eyebrow="Samples"
             title={<>A few directions you can start with</>}
-            copy="Show samples fast. The visitor should feel motion and range before they see the brief form."
+            copy="Pick the direction that feels closest to your launch, then turn it into a brief."
           />
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {mirrorProdSamples.map((sample) => (
@@ -104,9 +95,9 @@ export default function MirrorProdPage() {
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr,0.92fr]">
           <div className="glass-panel p-6 sm:p-8">
             <SectionTitle
-              eyebrow="Offer ladder"
+              eyebrow="Packages"
               title={<>What you can buy</>}
-              copy="Keep the packages easy to understand. Match the offer to the story job."
+              copy="Keep the packages easy to understand and tied to the result you want."
             />
             <div className="grid gap-4">
               {mirrorProdOffers.map((offer) => (
@@ -125,8 +116,8 @@ export default function MirrorProdPage() {
           <div className="glass-panel p-6 sm:p-8">
             <SectionTitle
               eyebrow="How it works"
-              title={<>Keep the flow short and cinematic.</>}
-              copy="The visitor should see a path from product + goal to usable creative without guessing what happens next."
+              title={<>A short path from idea to first cut.</>}
+              copy="Send the product and goal. We shape the angle, script, and delivery plan."
             />
             <div className="grid gap-3">
               {mirrorProdSteps.map((step, index) => (
@@ -150,22 +141,22 @@ export default function MirrorProdPage() {
 
           <div className="glass-panel p-6 sm:p-8">
             <SectionTitle
-              eyebrow="Trust block"
-              title={<>Provenance sits behind the value, not ahead of it.</>}
-              copy="Once the direction is right, add verification and provenance detail where the buyer actually needs reassurance."
+              eyebrow="After you pick a direction"
+              title={<>Keep the next step simple.</>}
+              copy="Once a sample feels right, the buyer should see exactly how the brief and delivery will work."
             />
             <div className="grid gap-3">
               <div className="info-card p-5">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">What they need first</p>
-                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">Samples, offer, and speed.</p>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">Step 1</p>
+                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">See sample looks fast.</p>
               </div>
               <div className="info-card p-5">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">What they need next</p>
-                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">Clear delivery path and a compact brief.</p>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">Step 2</p>
+                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">Choose the package that fits.</p>
               </div>
               <div className="info-card p-5">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">When provenance matters</p>
-                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">After the creative fit is obvious.</p>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--muted)]">Step 3</p>
+                <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">Send a short brief and lock delivery.</p>
               </div>
             </div>
           </div>
@@ -176,8 +167,8 @@ export default function MirrorProdPage() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="FAQ"
-            title={<>Answer the obvious friction early.</>}
-            copy="A few tight answers can remove hesitation without making the page feel like documentation."
+            title={<>Common questions</>}
+            copy="A few short answers remove hesitation before the brief form."
           />
           <div className="grid gap-4 lg:grid-cols-3">
             {mirrorProdFaqs.map((item) => (
@@ -190,7 +181,7 @@ export default function MirrorProdPage() {
         </div>
       </section>
 
-      <PageFooter note="MirrorProd India should feel quick, glossy, and commercial without hiding the next step behind strategy language." />
+      <PageFooter note="MirrorProd India should feel fast, visual, and easy to brief." />
 
       <TaskNavigator
         title="Need the right package?"

@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { MediaCard } from '@/components/MediaCard';
 import { MirrorSeedBuilder } from '@/components/MirrorSeedBuilder';
 import { PageFooter } from '@/components/PageFooter';
 import { SiteNav } from '@/components/SiteNav';
 import { HeroSplit } from '@/components/HeroSplit';
 import { SectionTitle } from '@/components/SectionTitle';
 import { TaskNavigator } from '@/components/TaskNavigator';
-import { mirrorSeedBenefits, mirrorSeedFaqs } from '@/lib/site';
+import { mirrorSeedBenefits, mirrorSeedFaqs, mirrorSeedMedia } from '@/lib/site';
 
 export default function MirrorSeedPage() {
   return (
@@ -21,7 +22,7 @@ export default function MirrorSeedPage() {
         copy={
           <>
             <p>Create a portable identity starter you can reuse across tools and sessions.</p>
-            <p className="helper-line mt-4">Simple utility, calm hierarchy, and the clearest flow in the family.</p>
+            <p className="helper-line mt-4">Simple to use, quick to copy, and easy to edit later.</p>
           </>
         }
         detail={
@@ -38,26 +39,20 @@ export default function MirrorSeedPage() {
           </>
         }
         visual={
-          <div className="glass-panel p-6 sm:p-8">
-            <p className="section-eyebrow mb-2 text-[#2F7A78]">3-step flow</p>
-            <div id="steps" className="grid gap-3">
-              {['Generate your seed', 'Save it', 'Paste it into any AI'].map((step, index) => (
-                <div key={step} className="info-card p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">Step {index + 1}</p>
-                  <p className="mt-3 text-lg font-extrabold tracking-[-0.04em] text-[var(--text)]">{step}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 rounded-[1.6rem] border border-[rgba(47,122,120,0.18)] bg-[rgba(47,122,120,0.08)] p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--muted)]">Preview</p>
-              <div className="mt-3 grid gap-2">
-                {['Tone: crisp, direct, warm', 'Role: founder / operator / builder', 'Boundaries: no fluff, clear next step', 'Memory: portable between sessions'].map((item) => (
-                  <div key={item} className="rounded-full border border-[rgba(47,122,120,0.16)] bg-white/70 px-4 py-3 text-sm font-semibold text-[var(--text)]">
-                    {item}
-                  </div>
-                ))}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {mirrorSeedMedia.map((item, index) => (
+              <div key={item.title} id={index === 1 ? 'steps' : undefined} className={index === 0 ? 'sm:col-span-2' : ''}>
+                <MediaCard
+                  alt={item.alt}
+                  kind={item.kind}
+                  label={item.label}
+                  note={item.note}
+                  ratio={index === 0 ? 'wide' : index === 2 ? 'square' : 'landscape'}
+                  src={item.src}
+                  title={item.title}
+                />
               </div>
-            </div>
+            ))}
           </div>
         }
       />
@@ -69,8 +64,8 @@ export default function MirrorSeedPage() {
           <div className="glass-panel p-6 sm:p-8">
             <SectionTitle
               eyebrow="Benefits"
-              title={<>The value is less repetition, not more ceremony.</>}
-              copy="Keep the payoff obvious and practical."
+              title={<>Why people use it</>}
+              copy="Save your setup once and stop rewriting the same context every time."
             />
             <div className="grid gap-4">
               {mirrorSeedBenefits.map((item) => (
@@ -88,8 +83,8 @@ export default function MirrorSeedPage() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="FAQ"
-            title={<>Short answers keep the utility feeling light.</>}
-            copy="This page should remove hesitation, not introduce a second onboarding flow."
+            title={<>Common questions</>}
+            copy="Short answers before you generate your seed."
           />
           <div className="grid gap-4 lg:grid-cols-3">
             {mirrorSeedFaqs.map((item) => (
@@ -102,7 +97,7 @@ export default function MirrorSeedPage() {
         </div>
       </section>
 
-      <PageFooter note="Mirror Seed should stay calm, portable, and immediately understandable without dressing up the utility." />
+      <PageFooter note="Mirror Seed makes your AI setup reusable, editable, and easy to carry between tools." />
 
       <TaskNavigator
         title="Need help with this page?"
